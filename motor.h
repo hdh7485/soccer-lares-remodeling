@@ -3,7 +3,7 @@ void motor_init() {
     pinMode(i, OUTPUT);
 }
 
-void motorA(int power) {
+void motorA(int power) {                                                 //FL
   int dir;
   int power_result;
 
@@ -22,11 +22,11 @@ void motorA(int power) {
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(2, dir); //FL
+  digitalWrite(2, dir);
   analogWrite(3, power_result);
 }
 
-void motorB(int power) {
+void motorB(int power) {                                                 //BL
   int dir;
   int power_result;
 
@@ -45,11 +45,11 @@ void motorB(int power) {
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(4, dir); //BL
+  digitalWrite(4, dir);
   analogWrite(5, power_result);
 }
 
-void motorC(int power) {
+void motorC(int power) {                                                 //BL
   int dir;
   int power_result;
 
@@ -68,11 +68,11 @@ void motorC(int power) {
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(7, dir); //BR
+  digitalWrite(7, dir);
   analogWrite(6, power_result);
 }
 
-void motorD(int power) {
+void motorD(int power) {                                                 //BR
   int dir;
   int power_result;
 
@@ -91,7 +91,7 @@ void motorD(int power) {
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(8, dir); //FR
+  digitalWrite(8, dir);
   analogWrite(9, power_result);
 }
 
@@ -131,16 +131,20 @@ void following_ball(int dir, int power) {
 }
 
 void angle_move(int a, int p){
-  if(a <= 90){
-    motor_drive(-p, -p + (p * 2 / 90) * a, p, p - (p * 2 / 90) * a);
+  if(a < 90){
+    motor_drive(p, -p + (p * 2 / 90) * a, -p, p - (p * 2 / 90) * a);
   }
-  else if(a > 90 && a <= 180){
-    motor_drive(-p + (p * 2 / 90) * (a - 90), p, p - (p * 2 / 90) * (a - 90), -p);
+  else if(a >= 90 && a < 180){
+    motor_drive(-p + (p * 2 / 90) * (a - 90), -p, p - (p * 2 / 90) * (a - 90), p);
   }
-  else if(a > 180 && a <= 270){
-    motor_drive(p, p - (p * 2 / 90) * (a - 180), -p, -p + (p * 2 / 90) * (a - 180));
+  else if(a >= 180 && a < 270){
+    motor_drive(-p, p - (p * 2 / 90) * (a - 180), p, -p + (p * 2 / 90) * (a - 180));
   }
-  else if(a > 270 && a <= 360){
-     motor_drive(p - (p * 2 / 90) * (a - 270), -p, -p + (p * 2 / 90) * (a - 270), p);
+  else if(a >= 270 && a <= 360){
+     motor_drive(p - (p * 2 / 90) * (a - 270), p, -p + (p * 2 / 90) * (a - 270), -p);
+  }
+  else{
+    motor_drive(0, 0, 0, 0);
   }
 }
+
