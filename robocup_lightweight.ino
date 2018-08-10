@@ -1,8 +1,8 @@
 #define DEBUG
 
-#include "motor.h"
-#include "IR.h"
-#include "compass.h"
+#include "line.h"
+#include "ir.h"
+//#include "compass.h"
 
 char dir = 0;
 
@@ -30,8 +30,13 @@ void loop() {
     delay(50);
     Serial.println(i);
     }*/
+
+  //motor_drive(-10, -10, 10, 10);
   read_ir();
-  read_compass();
-  //angle_move(360, 30);
+  //read_compass();
+  read_ultra();
+  read_light();
+  //dir_move(0, 10);
+  
 }
 

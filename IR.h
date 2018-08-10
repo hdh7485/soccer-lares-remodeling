@@ -72,7 +72,7 @@ int read_ir(byte i2c_id=0x01) {
 
   if (ball_tx_front > ball_tx_behind) {
     ball_tx = ball_tx_front;
-    ball_dir = ball_dir_front - 4;
+    ball_dir = - ball_dir_front + 4;
     if (ball_dir < 0) {
       ball_dir += 12;
     }

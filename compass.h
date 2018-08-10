@@ -33,8 +33,7 @@ float calculate_heading(int x, int y){
   return headingDegrees;
 }
 
-void read_compass() {
-
+float read_compass() {
   int x, y, z; //triple axis data
 
   //Tell the HMC what regist to begin writing data into
@@ -67,5 +66,6 @@ void read_compass() {
   Serial.print(calculate_heading(x, y));
   Serial.print('\n');
 #endif
+ return calculate_heading(x, y);
 }
 
