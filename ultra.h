@@ -1,3 +1,6 @@
+#ifndef ULTRA_H
+#define ULTRA_H
+
 int ultra[4] = {
    analogRead(A0),
    analogRead(A1),
@@ -32,3 +35,5 @@ void read_ultra() {
   Serial.print("\n");
 #endif
 }
+
+#endif

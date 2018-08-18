@@ -1,3 +1,6 @@
+#ifndef COMPASS_H
+#define COMPASS_H
+
 #include <Wire.h> //I2C Arduino Library
 
 void compass_init() {
@@ -69,3 +72,4 @@ float read_compass() {
  return calculate_heading(x, y);
 }
 
+#endif

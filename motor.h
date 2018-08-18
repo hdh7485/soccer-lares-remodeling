@@ -1,3 +1,6 @@
+#ifndef MOTOR_H
+#define MOTOR_H
+
 #include "compass.h"
 
 #define KP 1
@@ -32,7 +35,7 @@ void motorA(int power) {                                                 //FL
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(22, dir);
+  digitalWrite(26, dir);
   analogWrite(3, power_result);
 }
 
@@ -55,7 +58,7 @@ void motorB(int power) {                                                 //BL
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(24, dir);
+  digitalWrite(28, dir);
   analogWrite(5, power_result);
 }
 
@@ -78,7 +81,7 @@ void motorC(int power) {                                                 //BL
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(28, dir);
+  digitalWrite(24, dir);
   analogWrite(6, power_result);
 }
 
@@ -101,7 +104,7 @@ void motorD(int power) {                                                 //BR
     dir = 0;
     power_result = 0;
   }
-  digitalWrite(26, dir);
+  digitalWrite(22, dir);
   analogWrite(9, power_result);
 }
 
@@ -112,32 +115,17 @@ void motor_drive(int ma, int mb, int mc, int md) {
   motorD(md);
 }
 
-void following_ball(int dir, int power) {
-  switch (dir) {
-    case 1:
-      motor_drive(-power, -power, -power, -power);
-      break;
-    case 2:
-      motor_drive(-power, -power, -power, -power);
-      break;
-    case 3:
-      motor_drive(-power/2, -power/2, -power/2, -power/2);
-      break;
-    case 4:
-      motor_drive(0, 0, 0, 0);
-      break;
-    case 5:
-      motor_drive(power/2, power/2, power/2, power/2);
-      break;
-    case 6:
-      motor_drive(power, power, power, power);
-      break;
-    case 7:
-      motor_drive(power, power, power, power);
-      break;
-    default:
-      motor_drive(0, 0, 0, 0);
-  }
+void x_move(int power) {
+  motorA(-power);
+  motorB(power);
+  motorC(power);
+  motorD(-power);
+}
+
+void dir_move(float degree, int power) {
+  const float pi = 3.14;
+  int x_power = cos(degree / 180 * pi);
+  int y_power = sin(degree / 180 * pi);
 }
 
 void compass_move(int ma, int mb, int mc, int md)
@@ -161,7 +149,7 @@ void compass_move(int ma, int mb, int mc, int md)
   }
 }
 
-void dir_move(int angle, int power)  
+void compass_dir_move(int angle, int power)
 {
   switch (angle)
   {
@@ -190,30 +178,32 @@ void dir_move(int angle, int power)
       compass_move(0, -power, 0, power);
       break;
   }
-   /*case 8:
-      compass_move(0, -power, power);
-      break;
+  /*case 8:
+     compass_move(0, -power, power);
+     break;
     case 9:
-      compass_move(power / 2, - power, power / 2);
-      break;
+     compass_move(power / 2, - power, power / 2);
+     break;
     case 10:
-      compass_move(power, -power, 0);
-      break;
+     compass_move(power, -power, 0);
+     break;
     case 11:
-      compass_move(power, -power / 2, -power / 2);
-      break;
-  }*/
+     compass_move(power, -power / 2, -power / 2);
+     break;
+    }*/
 
   /*if(angle <= 90){
     compass_move(-power, -power + (power * 2 / 90) * angle, power, power - (power * 2 / 90) * angle);
-  }
-  else if(angle > 90 && angle <= 180){
+    }
+    else if(angle > 90 && angle <= 180){
     compass_move(-power + (power * 2 / 90) * (angle - 90), power, power - (power * 2 / 90) * (angle - 90), -power);
-  }
-  else if(angle > 180 && angle <= 270){
+    }
+    else if(angle > 180 && angle <= 270){
     compass_move(power, power - (power * 2 / 90) * (angle - 180), -power, -power + (power * 2 / 90) * (angle - 180));
-  }
-  else if(angle > 270 && angle <= 360){
+    }
+    else if(angle > 270 && angle <= 360){
     compass_move(power - (power * 2 / 90) * (angle - 270), -power, -power + (power * 2 / 90) * (angle - 270), power);
-  }*/
+    }*/
 }
+
+#endif

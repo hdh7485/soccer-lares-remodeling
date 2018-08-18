@@ -1,3 +1,6 @@
+#ifndef LIGHT_H
+#define LIGHT_H
+
 int light[4] = {
    analogRead(A4),
    analogRead(A5),
@@ -52,3 +55,4 @@ void read_light() {
   }
 }*/
 
+#endif
